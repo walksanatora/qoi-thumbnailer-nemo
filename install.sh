@@ -67,3 +67,6 @@ echo "copying x-qoi.xml to /usr/local/share/mime/packages"
 cp x-qoi.xml "/usr/local/share/mime/packages"
 echo "updateing mime database"
 update-mime-database "/usr/local/share/mime"
+echo "installing magic number"
+echo "0 string qoif image/x-qoi" >> /etc/magic
+echo "Done"
