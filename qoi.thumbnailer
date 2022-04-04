@@ -1,0 +1,4 @@
+[Thumbnailer Entry]
+TryExec=/usr/local/bin/qoi-thumbnail
+Exec=/usr/local/bin/qoi-thumbnail %s %i %o
+MimeType=image/x-qoi;

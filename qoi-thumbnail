@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+#name our variables so we can understand them
+if [[ "$#" -lt "3" ]]; then
+	echo "requires 3 arguments"
+	echo "$0 <size> <input path> <output path>"
+	echo "have $#/3 arguments"
+	echo "$0 $@"
+	exit 1
+fi
+image_size="$1"
+input_image="$2"
+output_thumbnail="$3"
+
+#create a temporary .png file untill .qoi is more widely adopted
+tmp="$(mktemp).png"
+
+qoiconv "$input_image" "$tmp"
+convert "$tmp" -resize "$image_size"x"$image_size" "$tmp"
+mv "$tmp" "$output_thumbnail"
+exit 0
