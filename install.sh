@@ -24,6 +24,20 @@ else
 	exit 1
 fi
 
+if command -v comvert >/dev/null;then
+	if convert -h | head -n1 | grep "ImageMagick";then
+		echo "'convert' from ImageMagick is installed"
+	else
+		echo "'convert' is installed but it is not ImageMagick. please put the ImageMagick one on path"
+		echo "or install the package `imagemagick`"
+		exit 1
+	fi
+else
+	echo "'convert' from ImageMagick is not installed"
+	echo "install it from the package `imagemagick`"
+	exit 1
+fi
+
 hme="$PWD"
 
 if command -v qoiconv >/dev/null;then
