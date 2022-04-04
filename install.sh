@@ -6,7 +6,7 @@
 # 3 - cd error
 # 100 - not run as root
 
-if which qoi-thumbnail >/dev/null;then
+if command -v qoi-thumbnail >/dev/null;then
 	echo ".qoi thumbnailer allready installed"
 	echo "not about to re-install it"
 	exit 0
