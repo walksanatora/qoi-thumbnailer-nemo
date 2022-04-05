@@ -21,3 +21,5 @@ and re-open your file explorer
 ## Thanks
 to this stackoverflow question
 [https://askubuntu.com/questions/1368910/how-to-create-custom-thumbnailers-for-nautilus-nemo-and-caja](https://askubuntu.com/questions/1368910/how-to-create-custom-thumbnailers-for-nautilus-nemo-and-caja)
+phoboslab for the qoi format and `qoiconv` program
+[https://github.com/phoboslab/qoi](https://github.com/phoboslab/qoi)
