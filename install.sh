@@ -24,7 +24,7 @@ else
 	exit 1
 fi
 
-if command -v comvert >/dev/null;then
+if command -v convert >/dev/null;then
 	if convert -h | head -n1 | grep "ImageMagick";then
 		echo "'convert' from ImageMagick is installed"
 	else
@@ -46,31 +46,30 @@ else
 	echo "qoiconv not found, checking git and gcc"
 	missing_gcc="y"
 	missing_git="y"
+	missing_stb="y"
 	if command -v git >/dev/null;then
 		missing_git="n"
 	fi
 	if command -v gcc >/dev/null;then
 		missing_gcc="n"
 	fi
-	if [[ "$missing_git" = "n" && "$missing_gcc" = "n" ]];then
-		echo "found git and gcc. installing qoiconv"
+	if [[ -d "/usr/include/stb" ]];then
+		missing_stb="n"
+	fi
+	if [[ "$missing_git" = "n" && "$missing_gcc" = "n" && "$missing_stb" = "n"  ]];then
+		echo "found git, gcc and libstb. installing qoiconv"
 		mkdir -p /usr/local/opt
 		cd /usr/local/opt || exit 3
 		git clone "https://github.com/phoboslab/qoi"
 		cd qoi || exit 3
-		if [[ -d "/usr/include/stb" ]];then
-			gcc qoiconv.c -std=c99 -O3 -o qoiconv -I/usr/include/stb
-			ln -fs "$PWD/qoiconv" "/usr/local/bin/"
-			echo "qoiconv installed"
-		else
-			echo "cannot find 'stb' folder please install"
-			echo "sudo apt install libstb-dev"
-			exit 2
-		fi
+		gcc qoiconv.c -std=c99 -O3 -o qoiconv -I/usr/include/stb
+		ln -fs "$PWD/qoiconv" "/usr/local/bin/"
+		echo "qoiconv installed"
 	else
-		echo "missing either git or gcc or both."
+		echo "missing either git, gcc, and/or libstb."
 		echo "missing git: $missing_git"
 		echo "missing gcc: $missing_gcc"
+		echo "missing libstb: $missing_stb"
 		exit 1
 	fi
 fi
@@ -78,13 +77,13 @@ fi
 cd "$hme" || exit 3
 
 echo "quickly chmod +x ing the thumbnailer script just in case"
-chmod +x ./qoi-thumbnail 
+chmod +x ./qoi-thumbnail
 echo "copying thumbnailer script to /usr/local/bin"
-cp ./qoi-thumbnail "/usr/local/bin"
+cp ./qoi-thumbnailer/qoi-thumbnailer/local/bin/qoi-thumbnail "/usr/local/bin"
 echo "copying .thumbnailer file to /usr/share/thumbnailers"
-cp ./qoi.thumbnailer "/usr/share/thumbnailers"
+cp ./qoi-thumbnailer/qoi-thumbnailer/share/thumbnailers/qoi.thumbnailer "/usr/share/thumbnailers"
 echo "copying x-qoi.xml to /usr/local/share/mime/packages"
-cp x-qoi.xml "/usr/local/share/mime/packages"
+cp ./qoi-thumbnailer/qoi-thumbnailer/share/mime/packages/x-qoi.xml "/usr/local/share/mime/packages"
 echo "updateing mime database"
 update-mime-database "/usr/local/share/mime"
 echo "installing magic number (so 'qoi' images can be picked up via the 'file' command)"

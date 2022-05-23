@@ -6,12 +6,13 @@
 git clone https://github.com/walksanatora/qoi-thumbnailer-nemo
 ```
 2. `cd qoi-thumbnailer-nemo`
-3. run install script as root
+3. build the apt packages
 ```sh
-sudo ./install.sh
+./build.sh
 ```
-4. done just open up Nautilus/Nemo/Caja to a folder with a .qoi file
-5. if thumbnails do not show up try
+4. install the `qoi-thumbnailer` and `qoiconv` packages
+
+if thumbnails do not show up try
 ```sh
 rm -rfv ~/.cache/thumbnails
 <file explorer> -q # fully quits the file explorer so it can search for new thumbnailers

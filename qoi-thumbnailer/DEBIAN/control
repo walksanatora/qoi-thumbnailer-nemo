@@ -1,0 +1,6 @@
+Package: qoi-thumbnailer
+Version: 1.0
+Maintainer: Walksanator
+Architecture: all
+Depends: imagemagick, qoiconv
+Description: support for thumbnailers in nemo and similar desktop file explorers

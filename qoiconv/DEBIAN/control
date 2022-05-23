@@ -1,0 +1,6 @@
+Package: qoiconv
+Version: 1.0
+Maintainer: walksanator
+Architecture: all
+Depends: gcc, wget, libstb-dev
+Description: Qoiconv package for handling converting .qoi to other image formats

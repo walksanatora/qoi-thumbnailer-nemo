@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+cd /usr/local/opt/qoi|| exit 1
+gcc qoiconv.c -std=c99 -O3 -o qoiconv -I/usr/include/stb
+ln -s $PWD/qoiconv /usr/local/bin/qoiconv
